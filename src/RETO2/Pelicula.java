@@ -2,24 +2,24 @@ package RETO2;
 
 public class Pelicula {
 
-	private int id;
+	private int idPelicula;
 	private int duracion;
 	private String genero;
 	private double precio;
 	
-	public Pelicula (int id, int duracion, String genero, double precio) {
-		this.id = id;
+	public Pelicula (int idPelicula, int duracion, String genero, double precio) {
+		this.idPelicula = idPelicula;
 		this.duracion = duracion;
 		this.genero = genero;
 		this.precio = precio;
 	}
 
 	public int getId() {
-		return id;
+		return idPelicula;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int idPelicula) {
+		this.idPelicula = idPelicula;
 	}
 
 	public int getDuracion() {
@@ -49,7 +49,10 @@ public class Pelicula {
 	@Override 
 	
 	public String toString() {
-		return "ID: " + id + " Duración: " + duracion + " min" + " Género: " + genero + " Precio: " + precio + " €"; 
+		return  "ID: " + idPelicula +
+				" Duración: " + duracion + " min" + 
+				" Género: " + genero + 
+				" Precio: " + precio + " €"; 
 	}
 	
 }
