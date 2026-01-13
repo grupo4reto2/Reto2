@@ -1,84 +1,130 @@
-use reto2_g4;
+CREATE SCHEMA IF NOT EXISTS `reto2_g4` DEFAULT CHARACTER SET utf8mb4;
+USE `reto2_g4`;
 
-create table Sala(
-IDSala int unsigned primary key,
-NomSala char (30) not null
-);
-alter table Sala
-add Aforo int unsigned not null default 200;
+-- =========================
+-- CLIENTE
+-- =========================
+CREATE TABLE cliente (
+  DNICliente VARCHAR(9) NOT NULL,
+  Nombre CHAR(30) NOT NULL,
+  Apellido CHAR(30) NOT NULL,
+  Correo CHAR(30) NOT NULL,
+  Contraseña VARCHAR(20) NOT NULL,
+  PRIMARY KEY (DNICliente)
+) ENGINE=InnoDB;
 
-alter table Sala 
-modify IDSala varchar (3) primary key; 
+-- =========================
+-- SALA
+-- =========================
+CREATE TABLE sala (
+  IDSala VARCHAR(3) NOT NULL,
+  NomSala CHAR(30) NOT NULL,
+  Aforo INT UNSIGNED NOT NULL DEFAULT 200,
+  PRIMARY KEY (IDSala)
+) ENGINE=InnoDB;
 
-create table Sesion(
-IDSesion int unsigned primary key,
-FecHoraIni timestamp not null,
-FecHoraFin timestamp not null,
-Precio double unsigned not null,
-IDSala int unsigned not null,
-Constraint FK_Sesion_Sala Foreign key (IDSala) references Sala(IDSala) on update cascade
-);
+-- =========================
+-- SESION
+-- =========================
+CREATE TABLE sesion (
+  IDSesion VARCHAR(6) NOT NULL,
+  FecHoraIni TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FecHoraFin TIMESTAMP NULL,
+  Precio DOUBLE UNSIGNED NOT NULL,
+  IDSala VARCHAR(3) NOT NULL,
+  PRIMARY KEY (IDSesion),
+  CONSTRAINT FK_Sesion_Sala
+    FOREIGN KEY (IDSala)
+    REFERENCES sala (IDSala)
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
 
-alter table Sesion
-modify FecHoraIni timestamp not null,
-modify FecHoraFin timestamp null;
+-- =========================
+-- COMPRA
+-- =========================
+CREATE TABLE compra (
+  IDCompra VARCHAR(3) NOT NULL,
+  Fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  DNICliente VARCHAR(9) NOT NULL,
+  descuento DOUBLE NOT NULL,
+  Canal TINYINT NOT NULL,
+  PRIMARY KEY (IDCompra),
+  CONSTRAINT fk_Compra_Cliente
+    FOREIGN KEY (DNICliente)
+    REFERENCES cliente (DNICliente)
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
 
-alter table Sesion 
-modify IDSala varchar (3) not null; 
+-- =========================
+-- ENTRADA
+-- =========================
+CREATE TABLE entrada (
+  IDEntrada INT UNSIGNED NOT NULL,
+  NumPers INT UNSIGNED NOT NULL,
+  IDSesion VARCHAR(6) NOT NULL,
+  IDCompra VARCHAR(3) NOT NULL,
+  PRIMARY KEY (IDEntrada),
+  CONSTRAINT fk_Entrada_Compra
+    FOREIGN KEY (IDCompra)
+    REFERENCES compra (IDCompra)
+    ON UPDATE CASCADE,
+  CONSTRAINT fk_Entrada_Sesion
+    FOREIGN KEY (IDSesion)
+    REFERENCES sesion (IDSesion)
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
 
-create table Pelicula(
-IDPelicula int unsigned primary key,
-Duracion time not null,
-IDSesion int unsigned not null,
-constraint FK_Pelicula_Sesion foreign key (IDSesion) references sesion (IDSesion) on update  cascade
-);
+-- =========================
+-- GENERO
+-- =========================
+CREATE TABLE genero (
+  IDGenero INT UNSIGNED NOT NULL,
+  NomGenero CHAR(20) NOT NULL,
+  PRIMARY KEY (IDGenero)
+) ENGINE=InnoDB;
 
-alter table Pelicula
-modify Duracion int unsigned not null;
+-- =========================
+-- PELICULA
+-- =========================
+CREATE TABLE pelicula (
+  IDPelicula INT UNSIGNED NOT NULL,
+  NomPelicula VARCHAR(50) NOT NULL,
+  Duracion INT UNSIGNED NOT NULL,
+  IDGenero INT UNSIGNED NOT NULL,
+  IDSesion VARCHAR(6) NOT NULL,
+  PRIMARY KEY (IDPelicula),
+  CONSTRAINT FK_Pelicula_Genero
+    FOREIGN KEY (IDGenero)
+    REFERENCES genero (IDGenero)
+    ON UPDATE CASCADE,
+  CONSTRAINT FK_Pelicula_Sesion
+    FOREIGN KEY (IDSesion)
+    REFERENCES sesion (IDSesion)
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
 
-create table Genero(
-IDGenero int unsigned primary key,
-NomGenero char(20) not null,
-IDPelicula int unsigned not null,
-constraint FK_Genero_Pelicula foreign key (IDPelicula) references pelicula (IDPelicula) on update cascade
-);
+insert into Sala (IDSala, NomSala, Aforo)
+values ('S01', 'Sala 1', 200);
+insert into Sala (IDSala, NomSala, Aforo)
+values ('S02', 'Sala 2', 200);
 
-create table Entrada (
-IDEntrada int unsigned primary key,
-NumPers int unsigned not null,
-IDSesion int unsigned not null,
-IDCompra int unsigned not null,
-constraint fk_Entrada_Sesion foreign key (IDSesion) references Sesion(IDSesion) on update cascade,
-constraint fk_Entrada_Compra foreign key (IDCompra) references Compra(IDCompra) on update cascade
-);
+insert into Sesion(IDSesion, FecHoraIni, FecHoraFin, Precio, IDSala)
+values('S01-01', '2026-01-16 16:00:00', '2026-01-16 18:00:00', 7.5, 'S01');
+insert into Sesion(IDSesion, FecHoraIni, FecHoraFin, Precio, IDSala)
+values('S02-02', '2026-01-16 16:00:00', '2026-01-16 18:00:00', 7.5, 'S02');
 
-
-create table Compra (
-IDCompra int unsigned primary key,
-Fecha date not null,
-DNICliente varchar (9) not null,
-constraint fk_Compra_Cliente foreign key (DNICliente) references cliente (DNICliente) on update cascade
-);
-
-alter table Compra
-modify Fecha timestamp not null,
-drop Hora;
-
-alter table Compra
-add descuento double not null;
-
-alter table Compra
-add constraint chk_Canal check (canal In (0,1)); 
-
-create table Cliente (
-DNICliente varchar (9) primary key,
-Nombre char (30) not null,
-Apellido char (30) not null,
-Correo char (30) not null
-);
-
-alter table Cliente
-add Contraseña varchar(20)  not null;
+insert into Genero (IDGenero, NomGenero)
+values (1, 'Animación');
 
 
+insert into Pelicula values(1, 'El Rey León', 88, 1,'S01-01');
+insert into Pelicula values(1, 'El Rey León', 88, 1,'S02-02');
+insert into Pelicula values();
+insert into Pelicula values();
+insert into Pelicula values();
+insert into Pelicula values();
+insert into Pelicula values();
+insert into Pelicula values();
+insert into Pelicula values();
+insert into Pelicula values();
 
