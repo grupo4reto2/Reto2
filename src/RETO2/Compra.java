@@ -141,8 +141,7 @@ public class Compra {
 	
 
 	public String toString() {
-
-		
+	
 
 		return "ID compra: " + idCompra +
 

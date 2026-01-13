@@ -7,7 +7,6 @@ public class Cliente {
 	private String correo;
 	private String contraseña;
 	
-	
 	public Cliente (String dni, String nombreApellidos, String correo, String contraseña) {
 		this.dni = dni;
 		this.nombreApellidos = nombreApellidos;
@@ -16,9 +15,17 @@ public class Cliente {
 	}
 
 
+	
+	
+	
+
 	public String getDni() {
 		return dni;
 	}
+
+
+
+
 
 
 	public void setDni(String dni) {
@@ -26,9 +33,17 @@ public class Cliente {
 	}
 
 
+
+
+
+
 	public String getNombreApellidos() {
 		return nombreApellidos;
 	}
+
+
+
+
 
 
 	public void setNombreApellidos(String nombreApellidos) {
@@ -36,34 +51,53 @@ public class Cliente {
 	}
 
 
+
+
+
+
 	public String getCorreo() {
 		return correo;
 	}
 
 
+
+
+
+
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	
+
+
+
+
+
 
 	public String getContraseña() {
 		return contraseña;
 	}
 
 
+
+
+
+
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
+
+
+
+
+
+
+	@Override 
 	
-	
-	@Override
-	
-	public String toString () {
+	public String toString() {
 		return  "DNI: " + dni +
-				" Cliente: " + nombreApellidos + 
-				" Correo electrónico: " + correo +
-				" Contraseña: "+ contraseña;
-				
+				" Cliente: " + nombreApellidos +
+				" Correo electrónico: " + correo + 
+				" Contraseña: " + contraseña;
 	}
 	
 }

@@ -24,7 +24,7 @@ public class LOGIN {
         // Sala
         Sala sala = new Sala("Sala principal", 1);
 
-        // Sesiones
+        // Sesioness
         Sesion sesionHulk = new Sesion(1001, LocalDateTime.of(2026, 10, 12, 18, 0),
                 LocalDateTime.of(2026, 10, 12, 20, 0), sala, hulk.getPrecio(), "Hulk");
 
@@ -34,15 +34,15 @@ public class LOGIN {
         Sesion sesionVidaDeBrian = new Sesion(1003, LocalDateTime.of(2026, 10, 12, 20, 30),
                 LocalDateTime.of(2026, 10, 12, 22, 5), sala, vidaDeBrian.getPrecio(), "La vida de Brian");
 
-        // ---------- MOSTRAR OPCIONES AL USUARIO ----------
+
         System.out.println("Bienvenido al cine. Elige una película:");
         System.out.println("1 - Hulk");
         System.out.println("2 - Handia");
         System.out.println("3 - La vida de Brian");
 
-        int opcion = sc.nextInt(); // lee la elección del usuario
+        int opcion = sc.nextInt(); 
 
-        // Convertimos la opción a enum
+        // Convertimos la opción a enummm
         OpcionPelicula eleccion;
         switch (opcion) {
             case 1:
@@ -60,7 +60,6 @@ public class LOGIN {
                 return;
         }
 
-        // ---------- SWITCH DE ELECCIÓN ----------
         switch (eleccion) {
             case HULK:
                 mostrarSesion(sesionHulk, hulk);
@@ -76,7 +75,7 @@ public class LOGIN {
         sc.close();
     }
 
-    // ---------- MÉTODO AUXILIAR PARA MOSTRAR SESIÓN ----------
+
     private static void mostrarSesion(Sesion sesion, Pelicula pelicula) {
         System.out.println("Seleccionada: " + sesion.getPelicula());
         System.out.println("ID sesión: " + sesion.getIdSesion());
