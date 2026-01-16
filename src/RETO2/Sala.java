@@ -5,13 +5,15 @@ import java.util.ArrayList;
 
 public class Sala {
 
-	private String nombre;
 	private int idSala;
+	private String nombre;
+	private int aforo;
 	private List<Sesion>sesiones;
 
-	public Sala (String nombre, int idSala) {
+	public Sala (String nombre, int idSala, int aforo) {
 		this.nombre = nombre;
 		this.idSala = idSala;
+		this.aforo = aforo;
 		this.sesiones = new ArrayList<>();
 	}
 
@@ -19,7 +21,6 @@ public class Sala {
 		return nombre;
 		
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -28,8 +29,16 @@ public class Sala {
 		return idSala;
 	}
 
-	public void setId(int idSala) {
+	public void setIdSala(int idSala) {
 		this.idSala = idSala;
+	}
+
+	public int getAforo() {
+		return aforo;
+	}
+
+	public void setAforo(int aforo) {
+		this.aforo = aforo;
 	}
 
 	public List<Sesion> getSesiones() {
