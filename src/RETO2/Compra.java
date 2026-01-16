@@ -10,7 +10,7 @@ public class Compra {
 
 	private Cliente cliente;
 
-	private  String dniCliente;
+	private  Cliente dniCliente;
 
 	private LocalDateTime fechaHora;
 
@@ -19,7 +19,7 @@ public class Compra {
 	private double importe;
 
 	
-	public Compra (int idCompra, Entrada numEntradas, Cliente cliente, String dniCliente, LocalDateTime fechaHora, double precio, double descuento, double importe) {
+	public Compra (int idCompra, Entrada numEntradas, Cliente cliente, Cliente dniCliente, LocalDateTime fechaHora, double precio, double descuento, double importe) {
 
 		this.idCompra = idCompra;
 
@@ -68,12 +68,12 @@ public class Compra {
 
 	}
 
-	public String getDNICliente() {
+	public Cliente getDNICliente() {
 		return cliente;
 
 	}
 
-	public void setDNICliente(String dniCliente) {
+	public void setDNICliente(Cliente dniCliente) {
 		this.dniCliente = dniCliente;
 
 	}
@@ -123,8 +123,8 @@ public class Compra {
 				" Cliente: " + cliente.getNombre() + cliente.getApellido() +
 				" DNICliente: " + dniCliente.getdniCliente() +
 				" Fecha y hora de la compra: " + fechaHora.getFechaHora () +
-				" Importe de la compra: " + importe.getImporte ()
-				" Descuento aplicado: " + descuento.getDescuento ();
+				" Importe de la compra: " + importe +
+				" Descuento aplicado: " + descuento;
 				
 	}
 
