@@ -3,19 +3,26 @@ package RETO2;
 public class Entrada {
 
 	private int idEntrada;
-	private Sesion sesion;
-	private int numEntradas;
-	private double precio;
-	private double descuento;
+	private Sesion Sesion;
+	private int numPersonas;
+	private Compra IDCompra;
 	
-	public Entrada (int idEntrada, Sesion sesion, int numEntradas, double precio, double descuento) {
+	public Entrada (int idEntrada, Sesion Sesion, int numPersonas, Compra IDCompra) {
 		this.idEntrada = idEntrada;
 		this.sesion = sesion;
-		this.numEntradas = numEntradas;
-		this.precio = precio;
-		this.descuento = descuento;
+		this.numPersonas = numPersonas;
+		this.idCompra = idCompra;
 	}
 
+	public Compra getIDCompra() {
+		return idCompra;
+	}
+
+	public void setIDCompra(Compra idCompra) {
+		this.idCompra = idCompra;
+	}
+
+		
 	public int getIdEntrada() {
 		return idEntrada;
 	}
@@ -28,44 +35,29 @@ public class Entrada {
 		return sesion;
 	}
 
-	public void setSesion(Sesion sesion) {
+	public void setSesion(Sesion Sesion) {
 		this.sesion = sesion;
 	}
 
 	
-	public int getNumEntradas() {
-		return numEntradas;
+	public int getnumPersonas() {
+		return numPersonas;
 	}
 
-	public void setNumEntradas(int numEntradas) {
-		this.numEntradas = numEntradas;
+	public void setnumPersonas(int numPersonas) {
+		this.numPersonas = numPersonas;
 	}
 
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
-	public double getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(double descuento) {
-		this.descuento = descuento;
-	}
 	
 	@Override 
 	
 	public String toString() {
 		
 		return "ID entrada: " + idEntrada +
-			   " Sesión: " + sesion.getIdSesion() +
-			   " Número de entradas: " + numEntradas +
-			   " Precio: " + precio + 
-			   " Descuento aplicado: " + descuento;
+			   " Sesión: " + sesion.getSesion() +
+			   " Número de personas: " + numPersonas + 
+				" ID de Compra: " + compra.getIDCompra();
+			 
 	}
 	
 }
