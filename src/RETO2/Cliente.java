@@ -3,15 +3,17 @@ package RETO2;
 public class Cliente {
 
 	private String dni;
-	private String nombreApellidos;
+	private String nombre
+	private string apellido;
 	private String correo;
-	private String contraseña;
+	private String contrasena;
 	
-	public Cliente (String dni, String nombreApellidos, String correo, String contraseña) {
+	public Cliente (String dni, String nombre, String apellido, String correo, String contrasena) {
 		this.dni = dni;
-		this.nombreApellidos = nombreApellidos;
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.correo = correo;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 	}
 
 	public String getDni() {
@@ -22,14 +24,21 @@ public class Cliente {
 		this.dni = dni;
 	}
 	
-	public String getNombreApellidos() {
-		return nombreApellidos;
+	public String getNombre() {
+		return nombre;
 	}
 	
-	public void setNombreApellidos(String nombreApellidos) {
-		this.nombreApellidos = nombreApellidos;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
+	public String getApellido() {
+		return apellido;
+		
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	public String getCorreo() {
 		return correo;
 	}
@@ -38,21 +47,21 @@ public class Cliente {
 		this.correo = correo;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getcontrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setcontrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	@Override 
 	
 	public String toString() {
 		return  "DNI: " + dni +
-				" Cliente: " + nombreApellidos +
+				" Cliente: " + nombre + apellido +
 				" Correo electrónico: " + correo + 
-				" Contraseña: " + contraseña;
+				" contrasena: " + contrasena;
 	}
 	
 }
