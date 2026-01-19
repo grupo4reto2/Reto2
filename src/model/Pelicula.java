@@ -1,4 +1,4 @@
-package RETO2;
+package model;
 
 public class Pelicula {
 
@@ -56,15 +56,16 @@ public class Pelicula {
 		this.idGenero = idGenero;
 	}
 
+	@Override
+	public String toString() {
+		return "Pelicula [idPelicula=" + idPelicula + ", nomPelicula=" + nomPelicula + ", duracion=" + duracion
+				+ ", idGenero=" + idGenero + ", nomGenero=" + nomGenero + ", nomGenero()=" + nomGenero()
+				+ ", nomPelicula()=" + nomPelicula() + ", getId()=" + getId() + ", getDuracion()=" + getDuracion()
+				+ ", getidGenero()=" + getidGenero() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
 
 	
-	@Override 
-	
-	public String toString() {
-		return  " ID: " + idPelicula +
-				" Pelicula " + nomPelicula +
-				" Duración: " + duracion + " min" + 
-				" Género: " + idGenero ;
-	}
 	
 }

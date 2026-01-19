@@ -1,6 +1,13 @@
 package RETO2;
 
 import java.util.Scanner;
+
+import model.Sala;
+import model.Sesion;
+
+import utils.conexion;
+import java.sql.Connection;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -11,8 +18,26 @@ import java.util.Comparator;
 
 
 public class actualBorrador {
+	
+	public static void geTConexxionn (){
+		
+		Connection conexxion  = conexion.geTConnexxionn();
+		
+		if (conexxion != null) {
+			
+			System.out.println("Conectado correctamente");
+						
+		}
+		
+		conexion.cerrarConexion();
+		
+	}
+	
+	
+	
 
 	private static void mensajeBienvenida () {
+		
 
 		String negrita = "\033[1m";
 
@@ -107,6 +132,8 @@ public class actualBorrador {
 		
 		Scanner teclado = new Scanner(System.in);
 		
+		geTConexxionn();
+		
 		mensajeBienvenida();
 		teclado.nextLine();
 		
@@ -138,7 +165,7 @@ public class actualBorrador {
 		
 		for (int f = 1 ; f <= 7; f++) {                           //CORREGIR
 			
-			fechas.add(LocalDateTime.now().plusDays(13 + f));
+			fechas.add(LocalDateTime.of(2026,2,1,10,0,0).plusDays(f - 1));
 
 			
 		}

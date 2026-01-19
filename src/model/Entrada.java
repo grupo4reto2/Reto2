@@ -1,4 +1,4 @@
-package RETO2;
+package model;
 
 public class Entrada {
 
