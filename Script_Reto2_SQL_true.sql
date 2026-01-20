@@ -1,5 +1,5 @@
 create schema if not exists `reto2_g4_true` default character set utf8mb4;
-use `reto_prueba` ;
+use `reto2_g4_true` ;
 
 
 -- =========================
@@ -21,7 +21,10 @@ CREATE TABLE `cliente` (
 insert into Cliente (DNICliente, Nombre, Apellido, Correo, Contraseña)
 values
 ('67856221B', 'Julio', 'Verne', 'jverne@gmail.com', 'JVerne00-'),
-('76466993C', 'Charles', 'Chaplin', 'tiemposModernos@gmail.com', 'Oona O neill');
+('76466993C', 'Charles', 'Chaplin', 'tiemposModernos@gmail.com', 'Oona O neill'),
+('12345678X', 'Ana', 'Perez', 'ana@gmail.com', 'Ana12345');
+
+
 
 -- =========================
 -- COMPRA
@@ -53,18 +56,18 @@ values
 -- =========================
 
 DROP TABLE IF EXISTS `entrada`;
-CREATE TABLE `entrada` (
-  `IDEntrada` int unsigned NOT NULL AUTO_INCREMENT,
-  `NumPers` int unsigned NOT NULL,
-  `IDSesion` int unsigned NOT NULL,
-  `IDCompra` int unsigned NOT NULL,
-  `FecHoraIni` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`IDEntrada`),
-  KEY `fk_Entrada_Compra` (`IDCompra`),
-  KEY `fk_Entrada_Sesion` (`IDSesion`),
-  CONSTRAINT `fk_Entrada_Compra` FOREIGN KEY (`IDCompra`) REFERENCES `compra` (`IDCompra`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_Entrada_Sesion1` FOREIGN KEY (`IDSesion`, `FecHoraIni`) REFERENCES `sesion` (`IDSesion`, `FecHoraIni`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE entrada (
+  IDEntrada INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  NumPers INT UNSIGNED NOT NULL,
+  IDSesion INT UNSIGNED NOT NULL,
+  IDCompra INT UNSIGNED NOT NULL,
+  FecHoraIni TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (IDEntrada),
+  KEY fk_Entrada_Compra (IDCompra),
+  KEY fk_Entrada_Sesion (IDSesion),
+  CONSTRAINT fk_Entrada_Compra FOREIGN KEY (IDCompra) REFERENCES compra(IDCompra) ON UPDATE CASCADE,
+  CONSTRAINT fk_Entrada_Sesion FOREIGN KEY (IDSesion) REFERENCES sesion(IDSesion) ON UPDATE CASCADE
+);
 
 /*Inserts*/
 INSERT INTO Entrada(IDEntrada, NumPers, IDSesion, IDCompra, FecHoraIni)
@@ -77,6 +80,7 @@ VALUES
 (6, 30, '3', '2', '2026-01-15 20:00:00'),
 (7, 12, '2', '3', '2026-01-15 22:00:00'),
 (8, 18, '1', '4', '2026-01-16 00:00:00');
+
 
 -- =========================
 -- GENERO
@@ -151,20 +155,20 @@ VALUES
 -- =========================
 
 DROP TABLE IF EXISTS `sesion`;
-CREATE TABLE `sesion` (
-  `IDSesion` int unsigned NOT NULL auto_increment,
-  `CodigoSesion` VARCHAR(6) NOT NULL,
-  `FecHoraIni` timestamp NOT NULL DEFAULT current_timestamp(),
-  `FecHoraFin` timestamp NULL DEFAULT NULL,
-  `Precio` double unsigned NOT NULL,
-  `IDSala` int unsigned NOT NULL,
-  `IDPelicula` int unsigned NOT NULL,
-  PRIMARY KEY (`IDSesion`, `FecHoraIni`),
-  KEY `FK_Sesion_Sala` (`IDSala`),
-  KEY `FK_Sesion_Pelicula` (`IDPelicula`),
-  CONSTRAINT `FK_Sesion_Pelicula` FOREIGN KEY (`IDPelicula`) REFERENCES `pelicula` (`IDPelicula`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_Sesion_Sala` FOREIGN KEY (`IDSala`) REFERENCES `sala` (`IDSala`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE sesion (
+  IDSesion INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  CodigoSesion VARCHAR(6) NOT NULL,
+  FecHoraIni TIMESTAMP NOT NULL,
+  FecHoraFin TIMESTAMP NULL,
+  Precio DOUBLE UNSIGNED NOT NULL,
+  IDSala INT UNSIGNED NOT NULL,
+  IDPelicula INT UNSIGNED NOT NULL,
+  PRIMARY KEY (IDSesion),
+  KEY FK_Sesion_Sala (IDSala),
+  KEY FK_Sesion_Pelicula (IDPelicula),
+  CONSTRAINT FK_Sesion_Sala FOREIGN KEY (IDSala) REFERENCES sala(IDSala) ON UPDATE CASCADE,
+  CONSTRAINT FK_Sesion_Pelicula FOREIGN KEY (IDPelicula) REFERENCES pelicula(IDPelicula) ON UPDATE CASCADE
+);
 
 /*Inserts*/
 INSERT INTO Sesion (CodigoSesion, FecHoraIni, FecHoraFin, Precio, IDSala, IDPelicula)

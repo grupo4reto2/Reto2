@@ -1,5 +1,9 @@
 package RETO2;
 import java.util.Scanner;
+
+import model.Sala;
+import model.Sesion;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
