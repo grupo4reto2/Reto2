@@ -52,9 +52,10 @@ public class Sala {
 	
 	public String toString () {
 		
-		return "ID Sala: " + idSala +
-				" Sala: " + nombre + 
-				" Aforo: " + aforo;
+		return "ID Sala: " + idSala.getIdSala() +
+				" Sala: " + nombre.getNombre() + 
+				" Aforo: " + aforo +
+				" Lista de Sesiones: " + sesiones.getSesiones() ;
 	}
 	
 	
