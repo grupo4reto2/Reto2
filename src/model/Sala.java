@@ -10,9 +10,9 @@ public class Sala {
 	private int aforo;
 	private List<Sesion>sesiones;
 
-	public Sala (String nombre, String idSala, int aforo) {
-		this.nombre = nombre;
+	public Sala (String idSala, String nombre, int aforo) {
 		this.idSala = idSala;
+		this.nombre = nombre;
 		this.aforo = aforo;
 		this.sesiones = new ArrayList<>();
 	}
